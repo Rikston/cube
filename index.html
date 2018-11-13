@@ -1,102 +1,24 @@
 <!DOCTYPE html>
 
-
 <html>
-    <head>
-        <title>Cube v2.0</title>
-     
-        <style>
-            *{
-                margin: 0;
-                padding: 0;
-            }
-            html, body{
-                background-color: transparent;
-                height: 100%;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                user-select: none;
-            }
-            .container{
-                
-                width: 100%;
-                height: 8000px;
-                
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                            
-                background-color: #c7ac15
-            }
-        </style>
-    </head>
-    <body>
-       <!-- <div class="container">
-            <div class="sl">
-                  <div class="sld-1"><img src="Image/1.jpg" alt="" width="500"></div>
-                  <div class="sld-2"><img src="Image/2.jpg" alt="" width="500"></div>
-                  <div class="sld-3"><img src="Image/3.jpg" alt="" width="500"></div>
-                  <div class="sld-4"><img src="Image/4.jpg" alt="" width="500"></div>
-                  <div class="sld-5"><img src="Image/5.jpg" alt="" width="500"></div>
-            </div>
-        </div>-->
-        <div class="container" data-anchor-height="638px"></div>
-        <script src="JS/jquery-3.2.0.min.js"></script>
-           <script src="JS/Cube.js"></script>
-           <script src="slick/slick.js"></script>
-        <script src="JS/parallax.js"></script>
-         <script>
-            var cube = new Cube(document.getElementsByClassName("container")[0]);
-            var Panel = new SettingsPanel();
-            var Opacity = new Slider({type:"horizontal", marginLeft: "20px"})
-            var BFV = new Switcher({marginLeft: "20px", switch: true});
-            var CP = new ColorPicker({marginLeft:"0", left: "80px", top: "80px"});
-            CP.style.opacity = 0;
-            window.onload = function(){
-                Opacity._circle.left = "124px";
-                Opacity.onchange = function(value){
-                    console.log(value);
-                    console.log(cube.sides.length);
-                    console.log(NeedFunction.ColorPlusOpacity(cube.sides[0].style.backgroundColor, value/100))
-                    for(var i = 0; i < cube.sides.length; ++i){
-                        cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(cube.sides[i].style.backgroundColor, value/100);    
-                    }
-                }
-                BFV.onchange = function(value){
-                        for(var i = 0; i < cube.sides.length; ++i){
-                            if(value)
-                                cube.sides[i].style.backfaceVisibility = "visible";
-                            else
-                                cube.sides[i].style.backfaceVisibility = "hidden";
-                        }
-                }
-                
-                CP.onchange = function(value){
-                    for(var i = 0; i < cube.sides.length; ++i){
-                        cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(value, Opacity.value/100);
-                    }
-                }
-
-               // document.body.appendChild(CP1.obj);
-
-               
-                var EL = new ElementSwitch(CP, {
-                    type:"Top",
-                    switch: true,
-                    left: 0,
-                    top: "0",
-                    backgroundColor:"#a73434",
-                    width: "140px",
-                    height: "70px",
-                    borderRadius: "150px 150px 10px 10px"
-                });
-                Panel.Add(Opacity);
-                Panel.Add(BFV);
-                Panel.Add(EL);
-                Panel.Add(CP);
-            }
-            
-        </script>
-    </body>
+  <head>
+    <title>Cube v2.0</title>
+    <link rel="stylesheet" href="CSS/style.css" />
+  </head>
+  <body>
+    <!--
+      <div class="container">
+          <div class="sl">
+                <div class="sld-1"><img src="Image/1.jpg" alt="" width="500"></div>
+                <div class="sld-2"><img src="Image/2.jpg" alt="" width="500"></div>
+                <div class="sld-3"><img src="Image/3.jpg" alt="" width="500"></div>
+                <div class="sld-4"><img src="Image/4.jpg" alt="" width="500"></div>
+                <div class="sld-5"><img src="Image/5.jpg" alt="" width="500"></div>
+          </div>
+      </div>
+    -->
+    <div class="container" data-anchor-height="638px"></div>
+    <script src="JS/Cube.js"></script>
+    <script src="JS/logic.js"></script>
+  </body>
 </html>

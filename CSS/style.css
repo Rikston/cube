@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    background-color: transparent;
+    height: 100%;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.container{
+    
+    width: 100%;
+    height: 8000px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+                
+    background-color: #c7ac15
+}

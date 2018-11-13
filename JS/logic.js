@@ -2,62 +2,60 @@ var cube;
 var cube1;
 var Panel;
 var Panel1;
+var cube = new Cube(document.getElementsByClassName("container")[0]);
+var Panel = new SettingsPanel();
+var Opacity = new Slider({ type: "horizontal", marginLeft: "20px" });
+var BFV = new Switcher({ marginLeft: "20px", switch: true });
+var CP = new ColorPicker({ marginLeft: "0", left: "80px", top: "80px" });
+CP.style.opacity = 0;
+window.onload = function() {
+  Opacity._circle.left = "124px";
+  Opacity.onchange = function(value) {
+    console.log(value);
+    console.log(cube.sides.length);
+    console.log(
+      NeedFunction.ColorPlusOpacity(
+        cube.sides[0].style.backgroundColor,
+        value / 100
+      )
+    );
+    for (var i = 0; i < cube.sides.length; ++i) {
+      cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(
+        cube.sides[i].style.backgroundColor,
+        value / 100
+      );
+    }
+  };
+  BFV.onchange = function(value) {
+    for (var i = 0; i < cube.sides.length; ++i) {
+      if (value) cube.sides[i].style.backfaceVisibility = "visible";
+      else cube.sides[i].style.backfaceVisibility = "hidden";
+    }
+  };
 
-window.onload = function(e){
-    var containers = document.getElementsByClassName("container");
-    cube = new Cube($(".container:eq(0)").get(0), { 
-        width: "30px",
-        height: "30px",
-        backgroundColor: "rgba(19, 64, 185, 0)"});
-    cube1 = new Cube($(".container:eq(1)").get(0), {
-        width: "300px",
-        height: "300px",
-        backgroundColor: "rgba(69, 39, 39, 0.5)"
-    });
-    Panel = new SettingsPanel({anchor: $(".container:eq(2)").get(0)});
-    Panel1 = new SettingsPanel({height: "300px", type: "other", backgroundColor_:"rgba(0,0,0,0)", alignSelf: "flex-start", overflowY: "hidden"});
-    Panel.Add(new Slider({marginLeft: "10px"}));
-    Panel.Add(new Slider({marginLeft: "50px"}));
-    Panel.Add(new Slider({marginLeft: "30px"}));
-    Panel.Add(new Switcher({marginLeft: "20px"}));
-    Panel1.Add(new ColorPicker({
-        width: "486px",
-        //marginTop: "280px",
-        height: "240px",
-        backgroundColor:"rgb(75, 75, 75)",
-        borderRadius: "2px"
-    }));
-    Panel.Add(Panel1);
-    Panel1.Add(new Slider({marginTop: "50px", marginBottom:"20px"}));
-    //Panel.Add(new Slider({type:"vertical", marginTop: "150px"}));
-   // Panel.Add(new SliderForColorPicker({anchor: Panel.obj}));
-    //Panel.Add(new HolstforColorSelection({anchor: document.body}));
-   // Panel.Add();
-    Panel.tools[0].onvaluechange = function(){
-        //console.log(anchor.ForChanging.sides[0]._style.backgroundColor);
-        //console.log(NeedFunction.ColorPlusOpacity(anchor.ForChanging.sides[0]._style.backgroundColor.__GetValueColor(), this.left/endMove));
-        for(var i = 0; i < cube.sides.length; ++i){
-           cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(cube.sides[i]._style.backgroundColor.__GetValueColor(), this.value/100); 
-        }
+  CP.onchange = function(value) {
+    for (var i = 0; i < cube.sides.length; ++i) {
+      cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(
+        value,
+        Opacity.value / 100
+      );
     }
-    
-    Panel.tools[1].onvaluechange = function(){
-        for(var i = 0; i < cube1.sides.length; ++i){
-            cube1.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(cube1.sides[i]._style.backgroundColor.__GetValueColor(), this.value/100); 
-        }
-    }
-   
-    Panel.tools[2].onvaluechange = function(){
-        console.log("PreviousValue: " + this.previousValue + ", Now value: " + this.value);  
-    }
-    
-   
-    Panel.tools[3].onvaluechange = function(a){
-        console.log(this.value);
-    }
-  /*  Panel.tools[4].onchange = function(color){
-        for(var i = 0; i < cube.sides.length; ++i){
-            cube.sides[i].style.backgroundColor = NeedFunction.ColorPlusOpacity(color,Panel.tools[0].value/100);
-        }
-    }*/
-}
+  };
+
+  // document.body.appendChild(CP1.obj);
+
+  var EL = new ElementSwitch(CP, {
+    type: "Top",
+    switch: true,
+    left: 0,
+    top: "0",
+    backgroundColor: "#a73434",
+    width: "140px",
+    height: "70px",
+    borderRadius: "150px 150px 10px 10px"
+  });
+  Panel.Add(Opacity);
+  Panel.Add(BFV);
+  Panel.Add(EL);
+  Panel.Add(CP);
+};
